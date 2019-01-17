@@ -1,0 +1,15 @@
+[bot]
+name = "go"
+message = "Hello. I'm a group bot. If you don't understand the following, you probably don't need me. Привет. Это - бот группы Rоссийская Fедерация. Цель - объединить и обеспечить общение русскоязычных пользователей Федиверса. Работает так: если хочешь в группу - подпишись на меня, а потом напиши мне что-нибудь, а я это бустану. Все, кто на меня подписан, увидят твое сообщение. Если хочешь связаться с админом, отправь мне директ."
+message_welcome = "В нашей группе новый подписчик. Прошу любить и жаловать, "
+
+
+[response]
+visibility = "public"
+delay = 3
+
+[mastodon]
+server= "https://mastodon.wrk.ru"
+clientId= "bcc...f8"
+clientSecret= "6df...d39"
+accessToken= "c928...7fb"
