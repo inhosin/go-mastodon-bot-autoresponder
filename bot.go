@@ -81,6 +81,8 @@ func (bot *Bot) Run() error {
 		case *mastodon.NotificationEvent:
 			time.AfterFunc(time.Duration(viper.GetInt32("response.delay"))*time.Second, func() {
 				notification := envType.Notification
+				botName := fmt.Sprintf("@%s", viper.GetString("bot.name"))
+				authorAccName := fmt.Sprintf("@%s", notification.Account.Acct)
 				var toMessage string
 				// switch notification type
 				switch notification.Type {
@@ -103,8 +105,8 @@ func (bot *Bot) Run() error {
 						return
 					}
 					bot.log(notification.Account.Acct+": ", fromMessage)
-					fromMessage = strings.TrimPrefix(fromMessage, "@"+viper.GetString("bot.name"))
-					toMessage = fmt.Sprintf("%s by %s", fromMessage, "@"+notification.Account.Acct)
+					fromMessage = strings.TrimPrefix(fromMessage, botName)
+					toMessage = fmt.Sprintf("%s by %s", fromMessage, authorAccName)
 					if err := bot.sendToot(toMessage); err != nil {
 						bot.logError(err)
 					}

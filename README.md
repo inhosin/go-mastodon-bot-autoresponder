@@ -6,8 +6,9 @@ This bot was based on the code developed for [mastodon-pug](https://github.com/m
 
 The bot is written in Golang 1.11 and uses [go-mastodon](github.com/mattn/go-mastodon).
 
-The bot can do the following:
 
+TODO:
+The bot can do the following:
 - respond to every toot sent to it by a non-follower with a predefined message mentioning the admins
     - regardless of the visibility setting of the response, the response is always sent as a DM. because of how DMs work, if the predefined message includes other peple's usernames, they'll also see the DM!
 - if it receives a DM from a non-follower, it can forward the text of that DM to the admins
@@ -17,25 +18,7 @@ The bot will not respond retroactively, i.e., the first time you run it, it will
 
 # Configuration
 
-The bot is configured in a JSON file that looks like this:
-
-```
-"bot": {
-        "name": "go",
-        "response": {
-            "visibility": "public",
-            "delay": 3
-        },
-        "message": "Hello. I'm a group bot. If you don't understand the following, you probably don't need me. Привет. Это - бот группы Rоссийская Fедерация. Цель - объединить и обеспечить общение русскоязычных пользователей Федиверса. Работает так: если хочешь в группу - подпишись на меня, а потом напиши мне что-нибудь, а я это бустану. Все, кто на меня подписан, увидят твое сообщение. Если хочешь связаться с админом, отправь мне директ.",
-        "message_welcome": "В нашей группе новый подписчик. Прошу любить и жаловать, ",
-    },
-    "mastodon": {
-        "Server": "https://mastodon.wrk.ru",
-        "ClientId": "bc....f8",
-        "ClientSecret": "6d....39",
-        "AccessToken": "c92....fb"
-    }
-```
+The bot is configured in a toml file. Example in _config/sample.toml
 
 All keys are mandatory. The first group contains information about connecting to the API and authenticating to it. The second group contains the autoresponder message and the usernames of the admins. The last group contains the path to the state file, which contains informations that lets the bot remember which messages it's already replied to (this cannot be empty, but the file doesn't have to exist the first time you run the bot).
 
@@ -45,10 +28,11 @@ This should really be packaged as a proper Python package, but I haven't done th
 
 ```
 # 1. clone this repo
-git clone ...
+git clone https://github.com/inhosin/go-mastodon-bot-autoresponder
 
 # 2. install the dependencies
 go get -u github.com/mattn/go-mastodon
+go get -u github.com/spf13/viper
 
 # 3. use tokentool to register the bot as an app on your server,
 # then authenticate to it (don't worry, it's not hard, there's a nice
@@ -56,12 +40,12 @@ go get -u github.com/mattn/go-mastodon
 написать свой tokentool
 
 # 4. create a config file and edit it appropriately
-cp _config/sample_config.json config.json
-nano config.json
+cp _config/sample.toml config.toml
+nano config.toml
 
 # 5. Build
 go buil
 
 # 6. run the bot!
-./mastodon-bot-autoresponder -c config.json
+./mastodon-bot-autoresponder
 ```

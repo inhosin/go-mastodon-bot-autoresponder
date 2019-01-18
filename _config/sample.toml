@@ -9,7 +9,7 @@ visibility = "public"
 delay = 3
 
 [mastodon]
-server= "https://mastodon.wrk.ru"
+server= "https://path.to.mastodon.instance"
 clientId= "bcc...f8"
 clientSecret= "6df...d39"
 accessToken= "c928...7fb"
